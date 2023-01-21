@@ -5,11 +5,4 @@
 </div>
 
 <!-- ユーザーの投稿一覧 -->
-
-<% @books.each do |book| %>
-<div>
-  <p>本のタイトル：<%= book.title %></p>
-  <p>感想：<%= book.body %></p>
-  <p>ユーザーネーム：<%= book.user.name %></p>
-</div>
-<% end %>
+<%= render 'books/list', books: @books %>
