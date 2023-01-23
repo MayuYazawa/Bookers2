@@ -1,12 +1,35 @@
-<% books.each do |book| %>
 <div>
-  <%= link_to book_path(book.id) do %>
-    <%= image_tag book.get_image %>
-  <% end %>
-  <p>投稿ユーザー画像：<%= image_tag book.user.get_profile_image(100,100) %></p>
-  <p>本のタイトル：<%= book.title %></p>
-  <p>感想：<%= book.body %></p>
-  <p>ユーザーネーム：<%= book.user.name %></p>
+  <h2>User info</h2>
+  <%= image_tag user.get_profile_image(100,100) %>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>name</th>
+        <th><%= user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= current_user.introduction %></th>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <%= link_to edit_user_path(user) do %>
+    <button type="button" class="btn btn-outline-secondary">
+      <i class="fas fa-user-cog"></i>
+    </button>
+    <% end %>
+  </p>
 </div>
+
+<h2>New book</h2>
+<%= form_with model: book do |f| %>
+  <div class="title">
+    <label for="book_title">Title</label><br>
+      <%= f.text_field :title %>
+  </div>
+  <div class="opinion">
+    <label for="book_opinion">Opinion</label><br>
+      <%= f.text_area :body %>
+    <%= f.submit 'Create Book' %>
 <% end %>
-<%= paginate books %>
